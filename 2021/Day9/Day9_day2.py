@@ -1,8 +1,8 @@
 import numpy as np
 from helper_function import helper_functions as hf
 
-#with open("input_files/example_input.txt", "r") as f:
-with open("input_files/input.txt", "r") as f:
+with open("input_files/example_input.txt", "r") as f:
+#with open("input_files/input.txt", "r") as f:
         heightmap = f.readlines()
 
 heightmap_array = []
@@ -25,3 +25,13 @@ for x, row in enumerate(heightmap_array):
 print("The lowest points are: ", lowest_points)
 print("Result is: ", result)
 
+# starting part 2
+visited_basins = []
+
+
+def traverse_basin(heightmap_array, lowest_point):
+    pass
+
+
+for i, lowest_point in enumerate(lowest_points):
+    score = traverse_basin(heightmap_array, lowest_point)
