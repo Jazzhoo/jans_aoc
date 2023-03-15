@@ -49,8 +49,9 @@ fn main() {
 
     result = 0;
     for item in &pass_list {
-        if (item.letter == item.pass.chars().collect::<Vec<char>>()[(item.instruction.0 - 1) as usize]) ^
-            (item.letter == item.pass.chars().collect::<Vec<char>>()[(item.instruction.1 - 1) as usize]) {
+        let char_1 = item.pass.chars().collect::<Vec<char>>()[(item.instruction.0 - 1) as usize];
+        let char_2 = item.pass.chars().collect::<Vec<char>>()[(item.instruction.1 - 1) as usize];
+        if (item.letter == char_1) ^ (item.letter == char_2) {
                 result += 1;
             }
     }
