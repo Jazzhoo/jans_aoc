@@ -17,7 +17,6 @@ fn main() {
 
     let data: Vec<&str> = data.trim().split("\n").collect();
     //let data: Vec<Vec<&str>> = data.split(" ").collect().collect();
-    let mut data_conv: Vec<Vec<&str>> = Vec::new();
     let mut pass_list: Vec<Password> = Vec::new();
 
     println!("{:?}", data);
@@ -39,7 +38,4 @@ fn main() {
         });
     }
         println!("{:?}", pass_list);
-
-    println!("data_conv after trim {:?}", data_conv);
-
 }
