@@ -44,5 +44,17 @@ fn main() {
         }
     }
         //println!("{:?}", pass_list);
+        println!("=====Part 1=====");
         println!("The # of valid passwords is: {}", result);
+
+    result = 0;
+    for item in &pass_list {
+        if (item.letter == item.pass.chars().collect::<Vec<char>>()[(item.instruction.0 - 1) as usize]) ^
+            (item.letter == item.pass.chars().collect::<Vec<char>>()[(item.instruction.1 - 1) as usize]) {
+                result += 1;
+            }
+    }
+        println!("=====Part 2=====");
+        println!("The # of valid passwords is: {}", result);
+
 }
