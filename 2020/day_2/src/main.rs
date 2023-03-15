@@ -18,7 +18,7 @@ fn main() {
     let data: Vec<&str> = data.trim().split("\n").collect();
     //let data: Vec<Vec<&str>> = data.split(" ").collect().collect();
     let mut data_conv: Vec<Vec<&str>> = Vec::new();
-    let mut pass_list: Vec<&Password> = Vec::new();
+    let mut pass_list: Vec<Password> = Vec::new();
 
     println!("{:?}", data);
 
@@ -32,14 +32,13 @@ fn main() {
         let temp_pass = temp_str[2];
         println!("tup: {:?}, temp_letter: {}, temp_pass: {}",
                  (x,y), temp_letter, temp_pass);
-        pass_list.push(&Password {
+        pass_list.push(Password {
             instruction: (x, y),
             letter: temp_letter,
             pass: String::from(temp_pass),
         });
-        println!("{:?}", pass_list);
-        
     }
+        println!("{:?}", pass_list);
 
     println!("data_conv after trim {:?}", data_conv);
 
