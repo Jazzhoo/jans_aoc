@@ -16,30 +16,54 @@ fn main() {
         tree_map.push(row_conv);
     }
     //println!("{:?}", tree_map);
-    const MOVE: (u32, u32) = (3, 1);
+    const MOVES: [(u32, u32); 5] = [(1, 1), (3, 1), (5, 1), (7, 1), (1, 2)];
     let mut x: u32 = 0;
     let mut y: u32 = 0;
     let mut trees_count: u32 = 0;
     let row_len = tree_map[0].len() as u32;
     for _row in &tree_map {
-        if (y + MOVE.0) >= row_len {
-            y = MOVE.0 - (row_len - y)
+        if (y + MOVES[1].0) >= row_len {
+            y = MOVES[1].0 - (row_len - y)
         }
         else {
-            y = y + MOVE.0; 
+            y = y + MOVES[1].0; 
         }
-        x = x + MOVE.1;
+        x = x + MOVES[1].1;
         if x >= tree_map.len() as u32 {
             break;
         }
         if tree_map[x as usize][y as usize] == '#' {
             trees_count += 1;
         }
-        //println!("The new coords are, row: {}, col: {} and square is: {}",
-        //        x, y, tree_map[x as usize][y as usize]);
     }
+    println!("====Part 1====");
     println!("The numbers of trees approached is: {}", trees_count);
+    println!("====Part 2====");
 
+    let mut result: u64 = 1;
 
+    for slope in MOVES {
+        x = 0;
+        y = 0;
+        trees_count = 0;
 
+        for _row in &tree_map {
+            if (y + slope.0) >= row_len {
+                y = slope.0 - (row_len - y)
+            }
+            else {
+                y = y + slope.0; 
+            }
+            x = x + slope.1;
+            if x >= tree_map.len() as u32 {
+                break;
+            }
+            if tree_map[x as usize][y as usize] == '#' {
+                trees_count += 1;
+            }
+        }
+        result *= trees_count as u64;
+        println!("The # of trees is: {}", trees_count);
+    }
+    println!("The result is {}", result);
 }
