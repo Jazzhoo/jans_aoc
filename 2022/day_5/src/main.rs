@@ -8,7 +8,7 @@ struct Instruction {
 }
 
 fn main() {
-    let input_raw = fs::read_to_string("inputs/example_input.txt");
+    let input_raw = fs::read_to_string("src/inputs/example_input.txt");
     let input_raw = match input_raw {
         Ok(file) => file,
         Err(err) => panic!("error occured {:?}", err),
@@ -43,14 +43,17 @@ fn main() {
             }
         }
     }
+    for key in crate_map.keys().copied() {
+        crate_map.get_mut(&key).unwrap().reverse();
 
-    for inst in &instruction_raw {
-        for i in 0..inst.moves {
-            let mut temp_chr = crate_map.get(&inst.from).unwrap();
-            println!("{:?}", temp_chr);
-            //crate_map.get(&inst.to).unwrap().push(temp_chr);
-            //&crate_map[&inst.to].push(temp_chr);
+    }
+    println!("before action {:?}", crate_map);
+
+    for inst in instruction_raw {
+        for _i in 0..inst.moves {
+            let temp_chr = crate_map.get_mut(&inst.from).unwrap().pop().unwrap();
+            crate_map.get_mut(&inst.to).unwrap().push(temp_chr);
+            println!("{:?}", crate_map);
         }
     }
-    println!("{:?}", crate_map);
 }
