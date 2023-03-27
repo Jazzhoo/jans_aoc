@@ -43,9 +43,10 @@ fn main() {
             }
         }
     }
-    for key in crate_map.keys().copied() {
-        crate_map.get_mut(&key).unwrap().reverse();
+    let keys: Vec<u32> = crate_map.keys().cloned().collect();
 
+    for key in &keys {
+        crate_map.get_mut(&key).unwrap().reverse();
     }
     println!("before action {:?}", crate_map);
 
@@ -53,7 +54,13 @@ fn main() {
         for _i in 0..inst.moves {
             let temp_chr = crate_map.get_mut(&inst.from).unwrap().pop().unwrap();
             crate_map.get_mut(&inst.to).unwrap().push(temp_chr);
-            println!("{:?}", crate_map);
         }
     }
+    println!("after action {:?}", crate_map);
+    let mut result = String::new();
+
+    for i in 1..=*keys.iter().max().unwrap() {
+        result.push(crate_map.get(&i).unwrap().last().unwrap().clone());
+    }
+    println!("The result is: {}", &result);
 }

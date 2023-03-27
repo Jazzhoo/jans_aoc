@@ -1,4 +1,3 @@
-import textwrap
 with open("input.txt", "r") as f:
     crates_with_instruction = f.readlines()
 
@@ -47,4 +46,3 @@ for stack in crates:
     result += stack[-1]
 
 print(result)
-
