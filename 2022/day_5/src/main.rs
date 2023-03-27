@@ -31,7 +31,6 @@ fn main() {
                 from: temp_line[3].parse().unwrap(), 
                 to: temp_line[5].parse().unwrap()})
         }
-
     }
     for row in crate_map_raw {
         let row_len = row.len();
@@ -44,12 +43,10 @@ fn main() {
         }
     }
     let keys: Vec<u32> = crate_map.keys().cloned().collect();
-
     for key in &keys {
         crate_map.get_mut(&key).unwrap().reverse();
     }
     println!("before action {:?}", crate_map);
-
     for inst in instruction_raw {
         for _i in 0..inst.moves {
             let temp_chr = crate_map.get_mut(&inst.from).unwrap().pop().unwrap();
@@ -58,7 +55,6 @@ fn main() {
     }
     println!("after action {:?}", crate_map);
     let mut result = String::new();
-
     for i in 1..=*keys.iter().max().unwrap() {
         result.push(crate_map.get(&i).unwrap().last().unwrap().clone());
     }
