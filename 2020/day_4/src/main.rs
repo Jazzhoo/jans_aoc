@@ -9,8 +9,6 @@ fn check_for_cid(input: &str) -> usize {
     }
 }
 fn validate_passport(input: &Vec<&str>) -> u32 {
-
-    println!("{:?}", input);
     1
 }
 fn main() {
@@ -41,7 +39,7 @@ fn main() {
         let temp_vec_len = temp_vec.len();
         //println!("{:?} || #: {}, val: {}", temp_vec, temp_vec_len, check_for_cid(&line));
         match temp_vec_len {
-            8 => valid_count += 1,
+            8 => valid_count += validate_passport(&temp_vec),
             7 => valid_count += match check_for_cid(&line) {
                 0 => 0,
                 1 => validate_passport(&temp_vec),
