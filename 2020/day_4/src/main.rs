@@ -1,4 +1,4 @@
-use std::fs;
+use std::{fs, marker::Tuple};
 
 fn check_for_cid(input: &str) -> usize {
     if input.contains("cid") {
@@ -9,6 +9,10 @@ fn check_for_cid(input: &str) -> usize {
     }
 }
 fn validate_passport(input: &Vec<&str>) -> u32 {
+    println!("{:?}", input);
+    for property in input {
+        let (key,val) = property.split(':', 1).collect();
+    }
     1
 }
 fn main() {
@@ -33,7 +37,6 @@ fn main() {
 
     println!("==== Part 2 debug ====");
     let mut valid_count = 0;
-    
     for line in &data {
         let temp_vec: Vec<&str> = line.trim().split(" ").collect();
         let temp_vec_len = temp_vec.len();
