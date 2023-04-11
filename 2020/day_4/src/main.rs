@@ -1,4 +1,4 @@
-use std::{fs, marker::Tuple};
+use std::{fs};
 
 fn check_for_cid(input: &str) -> usize {
     if input.contains("cid") {
@@ -11,7 +11,43 @@ fn check_for_cid(input: &str) -> usize {
 fn validate_passport(input: &Vec<&str>) -> u32 {
     println!("{:?}", input);
     for property in input {
-        let (key,val) = property.split(':', 1).collect();
+        let key_val: Vec<&str> = property.split(':').collect();
+        match key_val[0] {
+            "byr" => if key_val[1].len() == 4 {
+                let val = key_val[1];
+                let val_conv: u32 = match val.parse() {
+                    Ok(val) => val,
+                    Err(_) => return 0,
+                };
+                if (1920..=2002).contains(&val_conv) {
+                    println!("pass {}, {}", key_val[0], val);
+                }
+                else { 
+                    println!("not pass {}, {}", key_val[0], val);
+                    return 0 ;
+                };
+            }
+            else { return 0 },
+            "iyr" => if key_val[1].len() == 4 {
+                let val = key_val[1];
+                let val_conv: u32 = match val.parse() {
+                    Ok(val) => val,
+                    Err(_) => return 0,
+                };
+                if (2010..=2020).contains(&val_conv) {
+                    println!("pass {}, {}", key_val[0], val);
+                }
+                else { 
+                    println!("not pass {}, {}", key_val[0], val);
+                    return 0 ;
+                };
+            }
+            else { return 0 },
+            _ => (),
+
+        };
+        
+
     }
     1
 }
