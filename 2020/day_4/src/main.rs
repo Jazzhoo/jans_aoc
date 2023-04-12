@@ -43,6 +43,40 @@ fn validate_passport(input: &Vec<&str>) -> u32 {
                 };
             }
             else { return 0 },
+            "eyr" => if key_val[1].len() == 4 {
+                let val = key_val[1];
+                let val_conv: u32 = match val.parse() {
+                    Ok(val) => val,
+                    Err(_) => return 0,
+                };
+                if (2020..=2030).contains(&val_conv) {
+                    println!("pass {}, {}", key_val[0], val);
+                }
+                else { 
+                    println!("not pass {}, {}", key_val[0], val);
+                    return 0 ;
+                };
+            }
+            else { return 0 },
+            "hgt" => {
+                let val = &key_val[1][..key_val[1].len() - 2];
+                let val_int = val.parse::<u32>().unwrap();
+                let unit = &key_val[1][key_val[1].len() - 2..];
+                match unit {
+                    "cm" => {
+                        if val_int < 150 || val_int > 193 { return 0 }
+                    },
+                    "in" => {
+                        if val_int < 59 || val_int > 76 { return 0 }
+                    },
+                    _ => {
+                    }
+                    
+                };
+                println!("pass {}, {}, {}", key_val[0], val, unit);
+
+
+            },
             _ => (),
 
         };
