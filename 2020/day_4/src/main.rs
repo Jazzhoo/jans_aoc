@@ -82,7 +82,7 @@ fn validate_passport(input: &Vec<&str>) -> u32 {
                     if key_val[1].len() == 7 {
                         let first = &key_val[1][..1];
                         let val = &key_val[1][1..];
-                        if first == "#" && val.chars().all(char::is_ascii_hexdigit) {
+                        if first == "#" && val.chars().all(|x| x.is_ascii_hexdigit()) {
                             println!("pass {}, {}{}", key_val[0], first, val);
                         }
                         else { 
