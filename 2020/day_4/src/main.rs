@@ -26,6 +26,7 @@ fn validate_passport(input: &Vec<&str>) -> u32 {
                     println!("not pass {}, {}", key_val[0], val);
                     return 0 ;
                 };
+
             }
             else { return 0 },
             "iyr" => if key_val[1].len() == 4 {
@@ -77,6 +78,19 @@ fn validate_passport(input: &Vec<&str>) -> u32 {
 
 
             },
+                "hcl" => {
+                    if key_val[1].len() == 7 {
+                        let first = &key_val[1][..1];
+                        let val = &key_val[1][1..];
+                        if first == "#" && val.chars().all(char::is_ascii_hexdigit) {
+                            println!("pass {}, {}{}", key_val[0], first, val);
+                        }
+                        else { 
+                            println!("not pass {}, {}{}", key_val[0], first, val);
+                            return 0 ;
+                        };
+                    }
+                    else { return 0 }},
             _ => (),
 
         };
