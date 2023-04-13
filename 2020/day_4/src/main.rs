@@ -91,6 +91,17 @@ fn validate_passport(input: &Vec<&str>) -> u32 {
                         };
                     }
                     else { return 0 }},
+                "ecl" => {
+                    let col = &key_val[1];
+                    let allowed = vec!["amb", "blu", "brn", "gry", "grn", "hzl", "oth"];
+                    if !allowed.contains(&col) {
+                        println!("not pass {}, {} not in vec", key_val[0], col);
+                        return 0 ;
+                    }
+                    else {
+                        println!("pass {}, {} in vec", key_val[0], col);
+                    }
+                    },
             _ => (),
 
         };
