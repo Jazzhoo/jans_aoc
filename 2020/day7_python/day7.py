@@ -75,6 +75,17 @@ class Graph:
                 to_be_inspected.extend(self.relations_reversed[current_bag])
         return count
 
+    def nested_bags(self, starting_bag: str) -> int:
+        count = 1
+        if len(self.relations[starting_bag]) == 0:
+            return 1
+
+        for child in self.relations[starting_bag]:
+            qty = self.weights[(starting_bag, child)]
+            count += qty * self.nested_bags(child)
+
+        return count
+
 
 
 
@@ -119,5 +130,7 @@ if __name__ == "__main__":
     graph.print_graph()
     graph.print_graph_reversed()
     result1 = graph.can_contain("shiny gold")
+    result2 = graph.nested_bags("shiny gold")
 
     print(f"Part 1 solution: {result1}")
+    print(f"Part 2 solution: {result2 - 1}")
