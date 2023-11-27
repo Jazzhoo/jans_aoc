@@ -19,7 +19,7 @@ type Path struct {
 func appendPath(lop []Path, pth Path) []Path {
 	internalPath := Path{
 		caves:   make([]string, len(pth.caves)),
-		doubled: pth.doubled,
+		doubled: false,
 	}
 	copy(internalPath.caves, pth.caves)
 	lop = append(lop, internalPath)
@@ -36,8 +36,8 @@ func caveCount(pth Path, cve string) int {
     return count
 }
 func main() {
-	puzzle := "./input_files/main_puzzle.txt"
-	// puzzle := "./input_files/example_puzzle.txt"
+	// puzzle := "./input_files/main_puzzle.txt"
+	puzzle := "./input_files/example_puzzle.txt"
 	c, err := os.ReadFile(puzzle)
 
 	if err != nil {
@@ -68,12 +68,12 @@ func main() {
 	pathsToFollow = appendPath(pathsToFollow, initialPath)
 	// var currentPath Path
 	for {
-        // fmt.Printf("Paths to follow: %v\n", pathsToFollow)
         currentPath := pathsToFollow[len(pathsToFollow)-1]
 		pathsToFollow = pathsToFollow[: len(pathsToFollow)-1 : len(pathsToFollow)-1]
 		currentCave := currentPath.caves[len(currentPath.caves)-1]
-		// fmt.Printf("The current path is: %v\n", currentPath)
-		// fmt.Printf("from %s i see: %v\n", currentCave, caveMap[currentCave])
+        fmt.Printf("Paths to follow: %v\n", pathsToFollow)
+		fmt.Printf("The current path is: %v\n", currentPath)
+		fmt.Printf("from %s i see: %v\n", currentCave, caveMap[currentCave])
 		for _, nextCave := range caveMap[currentCave] {
             newPath := currentPath
 			newPath.caves = append(newPath.caves, nextCave)
@@ -88,9 +88,8 @@ func main() {
 				pathsToFollow = appendPath(pathsToFollow, newPath)
 			} else if !currentPath.doubled && caveCount(currentPath, nextCave) == 1 && nextCave != "start"{
                 newPath.doubled = true
-                // fmt.Printf("Adding to the paths to follow: %v\n", newPath)
+                fmt.Printf("Adding to the paths to follow: %v\n", newPath)
 				pathsToFollow = appendPath(pathsToFollow, newPath)
-                // fmt.Printf("Added path: %v\n", pathsToFollow[len(pathsToFollow) -1])
             }
 		}
 		// fmt.Printf("Next paths: %v\n", pathsToFollow)
@@ -101,7 +100,7 @@ func main() {
 		}
 	}
 	fmt.Printf("All paths found: %d\n", len(pathsFound))
-	// for idx, path := range pathsFound {
-	// 	fmt.Printf("%d: %v\n", idx, path)
-	// }
+	for idx, path := range pathsFound {
+		fmt.Printf("%d: %v\n", idx, path)
+	}
 }
