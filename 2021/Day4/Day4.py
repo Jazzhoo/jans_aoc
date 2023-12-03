@@ -30,7 +30,7 @@ list_of_boards = []
 for i in range(int(len(bingo_input)/6)):
     list_of_boards.append(np.loadtxt(bingo_input[6*i:6*(i+1)], dtype=np.int8))
 
-list_of_results = [np.zeros(shape=(5, 5), dtype=np.int8) for a in list_of_boards]
+list_of_results = [np.zeros(shape=(5, 5), dtype=np.int8) for _ in list_of_boards]
 
 for num in chosen_numbers:
     breakFlag = False
